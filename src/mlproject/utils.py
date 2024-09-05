@@ -8,21 +8,21 @@ from dataclasses import dataclass
 from dotenv import load_dotenv
 import pymysql
 
-#load_dotenv()
+load_dotenv()
 
-#host = os.getenv('host')
-#user = os.getenv('user')
-#password = os.getenv('password')
-#db = os.getenv('db')
+host = os.getenv('host')
+user = os.getenv('user')
+password = os.getenv('password')
+db = os.getenv('db')
 
 def read_sql_data():
   logging.info("Reading SQL database started.")
   try:
     mydb = pymysql.connect(
-      host='localhost',
-      user='root',
-      password='trader life 9861',
-      db='college_data')
+      host=host,
+      user=user,
+      password=password,
+      db=db)
     logging.info("Reading of data completed.",mydb)
     
     df = pd.read_sql_query('Select * from students',mydb)
