@@ -131,7 +131,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
-
+notebook\data\raw.csv
 
 # Spyder project settings
 .spyderproject
