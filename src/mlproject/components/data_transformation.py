@@ -3,7 +3,7 @@ import sys
 import pandas as pd
 import numpy as np
 from dataclasses import dataclass
-from sklearn.preprocessing import OneHotEncoder,StandardScaler
+from sklearn.preprocessing import OneHotEncoder,StandardScaler,LabelEncoder
 from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
@@ -35,8 +35,8 @@ class DataTransformation:
       ])
       cat_pipeline = Pipeline(steps=[
         ("imputer",SimpleImputer(strategy = 'most_frequent')),
-        ('one_hot_encoder',OneHotEncoder()),
-        ('scaler',StandardScaler(with_mean = False))
+        ('onehot_encoder',OneHotEncoder()),
+        ('scaler',StandardScaler(with_mean=False))
       ])
       
       logging.info(f"numerical features: {numerical_columns}")
@@ -83,8 +83,8 @@ class DataTransformation:
       input_features_train_arr = preprocessing_obj.fit_transform(input_features_train_df)
       input_features_test_arr = preprocessing_obj.transform(input_features_test_df)
       
-      train_arr = np.c_[input_features_train_arr,np.array(input_features_train_df)]
-      test_arr = np.c_[input_features_test_arr,np.array(input_features_test_df)]
+      train_arr = np.c_[input_features_train_arr,np.array(target_features_train_df)]
+      test_arr = np.c_[input_features_test_arr,np.array(target_features_test_df)]
       
       logging.info("Saved preprocessing object.")
       
